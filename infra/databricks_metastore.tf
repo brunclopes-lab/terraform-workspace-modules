@@ -1,0 +1,19 @@
+module "databricks_metastore" {
+  source                          = "./modules/databricks_metastore"
+  azure_client_secret             = var.azure_client_secret
+  storage_account_dados_name      = module.storage_account.storage_account_dados.name
+  storage_account_unity_name      = module.storage_account.storage_account_unity.name
+  prefix_name                     = var.prefix_name
+  managed_by                      = var.managed_by
+  owner                           = var.owner
+  metastore_name_interpolated     = local.metastore_name_interpolated
+  metastore_location              = var.metastore_location
+  databricks_workspace_id         = module.databricks.databricks_workspace.workspace_id
+  databricks_workspace_url        = module.databricks.databricks_workspace.workspace_url
+  azure_data_factory_principal_id = module.data_factory.data_factory.identity[0].principal_id
+  databricks_account_id           = var.databricks_account_id
+  databricks_user_id              = var.databricks_user_id
+  databricks_sp_terraform_id      = var.databricks_sp_terraform_id
+  access_connector_id             = module.access_connector.access_connector_id
+  metastore_id                    = var.metastore_id
+}
