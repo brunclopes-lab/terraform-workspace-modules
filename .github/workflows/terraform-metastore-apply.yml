@@ -24,4 +24,12 @@ jobs:
         run: |
           cd metastore
           terraform validate
-          terraform apply -auto-approve
+          terraform apply -auto-approve \
+          -var="azure_client_secret=${{secrets.TF_VAR_AZURE_CLIENT_SECRET}}" \
+          -var="databricks_account_id=${{secrets.TF_VAR_DATABRICKS_ACCOUNT_ID}}" \
+          -var="databricks_sp_terraform_id=${{secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID}}" \
+          -var="databricks_user_id=${{secrets.TF_VAR_DATABRICKS_USER_ID}}" \
+          -var="sql_server_user=${{secrets.TF_VAR_SQL_SERVER_USER}}" \
+          -var="sql_server_password=${{secrets.TF_VAR_SQL_SERVER_PASSWORD}}" \
+          -var="vm_user=${{secrets.TF_VAR_VM_USER}}" \
+          -var="vm_password=${{secrets.TF_VAR_VM_PASSWORD}}" 
