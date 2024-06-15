@@ -29,13 +29,11 @@ jobs:
       - name: Terraform Init
         run: cd infra && terraform init
 
-      - name: Terraform Workspace New para Dev
-        run: terraform workspace new dev
-
       - name: Terraform Plan para Dev
         run: |
           cd infra
           terraform validate
+          terraform workspace new dev
           terraform workspace select dev
           terraform plan \
             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_DEV }}" \
@@ -59,13 +57,11 @@ jobs:
       - name: Terraform Init
         run: cd infra && terraform init
 
-      - name: Terraform Workspace New para Dev
-        run: terraform workspace new dev
-
       - name: Terraform Apply para Dev
         run: |
           cd infra
           terraform validate
+          terraform workspace new dev
           terraform workspace select dev
           terraform apply -auto-approve \
             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_DEV }}" \
@@ -88,13 +84,11 @@ jobs:
       - name: Terraform Init
         run: cd infra && terraform init
 
-      - name: Terraform Workspace New para prd
-        run: terraform workspace new prd
-
       - name: Terraform Plan para prd
         run: |
           cd infra
           terraform validate
+          terraform workspace new prd
           terraform workspace select prd
           terraform plan \
             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_PRD }}" \
@@ -118,13 +112,11 @@ jobs:
       - name: Terraform Init
         run: cd infra && terraform init
 
-      - name: Terraform Workspace New para prd
-        run: terraform workspace new prd
-
       - name: Terraform Apply para prd
         run: |
           cd infra
           terraform validate
+          terraform workspace new prd
           terraform workspace select prd
           terraform apply -auto-approve \
             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_PRD }}" \
