@@ -15,6 +15,7 @@ env:
   sql_server_password: ${{secrets.TF_VAR_SQL_SERVER_PASSWORD}}
   vm_user: ${{secrets.TF_VAR_VM_USER}}
   vm_password: ${{secrets.TF_VAR_VM_PASSWORD}}
+  prefix_name: ${{secrets.TF_VAR_PREFIX_NAME}}
   
 jobs:
   terraform_destroy:
@@ -39,4 +40,5 @@ jobs:
           -var="sql_server_user=${{secrets.TF_VAR_SQL_SERVER_USER}}" \
           -var="sql_server_password=${{secrets.TF_VAR_SQL_SERVER_PASSWORD}}" \
           -var="vm_user=${{secrets.TF_VAR_VM_USER}}" \
-          -var="vm_password=${{secrets.TF_VAR_VM_PASSWORD}}" 
+            -var="vm_password=${{secrets.TF_VAR_VM_PASSWORD}}" \
+            -var="prefix_name=${{secrets.TF_VAR_PREFIX_NAME}}" 

@@ -14,7 +14,6 @@ variable "azure_client_secret" {
 variable "prefix_name" {
   type        = string
   description = "nome de prefixo do projeto"
-  default     = "tfm-bl"
 }
 
 variable "location" {

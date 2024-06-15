@@ -17,6 +17,7 @@ env:
   sql_server_password: ${{secrets.TF_VAR_SQL_SERVER_PASSWORD}}
   vm_user: ${{secrets.TF_VAR_VM_USER}}
   vm_password: ${{secrets.TF_VAR_VM_PASSWORD}}
+  prefix_name: ${{secrets.TF_VAR_PREFIX_NAME}}
 
 jobs:
   terraform_plan_dev:
@@ -36,14 +37,15 @@ jobs:
           terraform workspace new dev || true
           terraform workspace select dev
           terraform plan \
-            -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_DEV }}" \
-            -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID_DEV }}" \
-            -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID_DEV }}" \
-            -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID_DEV }}" \
-            -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER_DEV }}" \
-            -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD_DEV }}" \
-            -var="vm_user=${{ secrets.TF_VAR_VM_USER_DEV }}" \
-            -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD_DEV }}" \
+            -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET }}" \
+            -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID }}" \
+            -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID }}" \
+            -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID }}" \
+            -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER }}" \
+            -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD }}" \
+            -var="vm_user=${{ secrets.TF_VAR_VM_USER }}" \
+            -var="vm_password=${{secrets.TF_VAR_VM_PASSWORD}}" \
+            -var="prefix_name=${{secrets.TF_VAR_PREFIX_NAME}}" \
             -var="metastore_id=${{ secrets.TF_VAR_METASTORE_ID }}"
 
   terraform_apply_dev:
@@ -64,14 +66,15 @@ jobs:
           terraform workspace new dev || true
           terraform workspace select dev
           terraform apply -auto-approve \
-            -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_DEV }}" \
-            -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID_DEV }}" \
-            -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID_DEV }}" \
-            -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID_DEV }}" \
-            -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER_DEV }}" \
-            -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD_DEV }}" \
-            -var="vm_user=${{ secrets.TF_VAR_VM_USER_DEV }}" \
-            -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD_DEV }}" \
+            -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET }}" \
+            -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID }}" \
+            -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID }}" \
+            -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID }}" \
+            -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER }}" \
+            -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD }}" \
+            -var="vm_user=${{ secrets.TF_VAR_VM_USER }}" \
+            -var="vm_password=${{secrets.TF_VAR_VM_PASSWORD}}" \
+            -var="prefix_name=${{secrets.TF_VAR_PREFIX_NAME}}" \
             -var="metastore_id=${{ secrets.TF_VAR_METASTORE_ID }}"
 
   terraform_plan_prd:
@@ -91,14 +94,15 @@ jobs:
           terraform workspace new prd || true
           terraform workspace select prd
           terraform plan \
-            -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_PRD }}" \
-            -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID_PRD }}" \
-            -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID_PRD }}" \
-            -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID_PRD }}" \
-            -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER_PRD }}" \
-            -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD_PRD }}" \
-            -var="vm_user=${{ secrets.TF_VAR_VM_USER_PRD }}" \
-            -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD_PRD }}" \
+            -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET }}" \
+            -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID }}" \
+            -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID }}" \
+            -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID }}" \
+            -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER }}" \
+            -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD }}" \
+            -var="vm_user=${{ secrets.TF_VAR_VM_USER }}" \
+            -var="vm_password=${{secrets.TF_VAR_VM_PASSWORD}}" \
+            -var="prefix_name=${{secrets.TF_VAR_PREFIX_NAME}}" \
             -var="metastore_id=${{ secrets.TF_VAR_METASTORE_ID }}"
 
   terraform_apply_prd:
@@ -119,12 +123,13 @@ jobs:
           terraform workspace new prd || true
           terraform workspace select prd
           terraform apply -auto-approve \
-            -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_PRD }}" \
-            -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID_PRD }}" \
-            -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID_PRD }}" \
-            -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID_PRD }}" \
-            -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER_PRD }}" \
-            -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD_PRD }}" \
-            -var="vm_user=${{ secrets.TF_VAR_VM_USER_PRD }}" \
-            -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD_PRD }}" \
+            -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET }}" \
+            -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID }}" \
+            -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID }}" \
+            -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID }}" \
+            -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER }}" \
+            -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD }}" \
+            -var="vm_user=${{ secrets.TF_VAR_VM_USER }}" \
+            -var="vm_password=${{secrets.TF_VAR_VM_PASSWORD}}" \
+            -var="prefix_name=${{secrets.TF_VAR_PREFIX_NAME}}" \
             -var="metastore_id=${{ secrets.TF_VAR_METASTORE_ID }}"
