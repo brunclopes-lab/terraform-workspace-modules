@@ -1,4 +1,4 @@
-name: Terraform Apply
+name: Terraform Plan
 on:
   workflow_dispatch
 
@@ -11,10 +11,9 @@ env:
   AZDO_PERSONAL_ACCESS_TOKEN: ${{ secrets.AZDO_PERSONAL_ACCESS_TOKEN }}
 
 jobs:
-  terraform_apply_dev:
-    name: Terraform Apply para Dev
+  terraform_plan_dev:
+    name: Terraform Plan para Dev
     runs-on: ubuntu-latest
-    needs: terraform_plan_dev
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,12 +24,12 @@ jobs:
       - name: Terraform Workspace New para Dev
         run: terraform workspace new dev
 
-      - name: Terraform Apply para Dev
+      - name: Terraform Plan para Dev
         run: |
           cd infra
           terraform validate
           terraform workspace select dev
-          terraform apply -auto-approve \
+          terraform plan \
             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_DEV }}" \
             -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID_DEV }}" \
             -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID_DEV }}" \
@@ -41,10 +40,9 @@ jobs:
             -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD_PRD }}" \
             -var="metastore_id=${{ secrets.TF_VAR_METASTORE_ID }}"
 
-  terraform_apply_prd:
-    name: Terraform Apply para prd
+  terraform_plan_prd:
+    name: Terraform Plan para prd
     runs-on: ubuntu-latest
-    needs: terraform_plan_prd
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -55,12 +53,12 @@ jobs:
       - name: Terraform Workspace New para prd
         run: terraform workspace new prd
 
-      - name: Terraform Apply para prd
+      - name: Terraform Plan para prd
         run: |
           cd infra
           terraform validate
           terraform workspace select prd
-          terraform apply -auto-approve \
+          terraform plan \
             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_PRD }}" \
             -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID_PRD }}" \
             -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID_PRD }}" \

@@ -35,7 +35,8 @@ jobs:
             -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER }}" \
             -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD }}" \
             -var="vm_user=${{ secrets.TF_VAR_VM_USER }}" \
-            -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD }}"
+            -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD_PRD }}" \
+            -var="metastore_id=${{ secrets.TF_VAR_METASTORE_ID }}" 
 
   terraform_destroy_prod:
     name: Terraform Destroy Prod
@@ -61,4 +62,5 @@ jobs:
             -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER }}" \
             -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD }}" \
             -var="vm_user=${{ secrets.TF_VAR_VM_USER }}" \
-            -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD }}"
+            -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD_PRD }}" \
+            -var="metastore_id=${{ secrets.TF_VAR_METASTORE_ID }}" 

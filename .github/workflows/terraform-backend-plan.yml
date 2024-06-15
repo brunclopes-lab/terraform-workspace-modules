@@ -1,4 +1,4 @@
-name: Terraform Backend Apply
+name: Terraform Backend Plan
 on: workflow_dispatch
 env:
   ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
@@ -7,8 +7,8 @@ env:
   ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
 
 jobs:
-  terraform_apply:
-    name: Terraform Apply
+  terraform_plan:
+    name: Terraform Plan
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -17,8 +17,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Terraform Apply
+      - name: Terraform Plan
         run: |
           cd backend
           terraform init
-          terraform apply -auto-approve
+          terraform validate
+          terraform plan
