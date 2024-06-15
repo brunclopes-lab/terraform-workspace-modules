@@ -1,78 +1,78 @@
-name: Terraform Infra Plan
-on:
-  workflow_dispatch
+# name: Terraform Infra Plan
+# on:
+#   workflow_dispatch
 
-env:
-  ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
-  ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
-  ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
-  ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
-  AZDO_ORG_SERVICE_URL: ${{secrets.AZDO_ORG_SERVICE_URL}}
-  AZDO_PERSONAL_ACCESS_TOKEN: ${{secrets.AZDO_PERSONAL_ACCESS_TOKEN}}
-  azure_client_secret: ${{secrets.TF_VAR_AZURE_CLIENT_SECRET}}
-  databricks_account_id: ${{secrets.TF_VAR_DATABRICKS_ACCOUNT_ID}}
-  databricks_sp_terraform_id: ${{secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID}}
-  databricks_user_id: ${{secrets.TF_VAR_DATABRICKS_USER_ID}}
-  sql_server_user: ${{secrets.TF_VAR_SQL_SERVER_USER}}
-  sql_server_password: ${{secrets.TF_VAR_SQL_SERVER_PASSWORD}}
-  vm_user: ${{secrets.TF_VAR_VM_USER}}
-  vm_password: ${{secrets.TF_VAR_VM_PASSWORD}}
+# env:
+#   ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
+#   ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
+#   ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
+#   ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
+#   AZDO_ORG_SERVICE_URL: ${{secrets.AZDO_ORG_SERVICE_URL}}
+#   AZDO_PERSONAL_ACCESS_TOKEN: ${{secrets.AZDO_PERSONAL_ACCESS_TOKEN}}
+#   azure_client_secret: ${{secrets.TF_VAR_AZURE_CLIENT_SECRET}}
+#   databricks_account_id: ${{secrets.TF_VAR_DATABRICKS_ACCOUNT_ID}}
+#   databricks_sp_terraform_id: ${{secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID}}
+#   databricks_user_id: ${{secrets.TF_VAR_DATABRICKS_USER_ID}}
+#   sql_server_user: ${{secrets.TF_VAR_SQL_SERVER_USER}}
+#   sql_server_password: ${{secrets.TF_VAR_SQL_SERVER_PASSWORD}}
+#   vm_user: ${{secrets.TF_VAR_VM_USER}}
+#   vm_password: ${{secrets.TF_VAR_VM_PASSWORD}}
 
-jobs:
-  terraform_plan_dev:
-    name: Terraform Plan para Dev
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+# jobs:
+#   terraform_plan_dev:
+#     name: Terraform Plan para Dev
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
 
-      - name: Terraform Init
-        run: cd infra && terraform init
+#       - name: Terraform Init
+#         run: cd infra && terraform init
 
-      - name: Terraform Workspace New para Dev
-        run: terraform workspace new dev
+#       - name: Terraform Workspace New para Dev
+#         run: terraform workspace new dev
 
-      - name: Terraform Plan para Dev
-        run: |
-          cd infra
-          terraform validate
-          terraform workspace select dev
-          terraform plan \
-            -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_DEV }}" \
-            -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID_DEV }}" \
-            -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID_DEV }}" \
-            -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID_DEV }}" \
-            -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER_DEV }}" \
-            -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD_DEV }}" \
-            -var="vm_user=${{ secrets.TF_VAR_VM_USER_DEV }}" \
-            -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD_PRD }}" \
-            -var="metastore_id=${{ secrets.TF_VAR_METASTORE_ID }}"
+#       - name: Terraform Plan para Dev
+#         run: |
+#           cd infra
+#           terraform validate
+#           terraform workspace select dev
+#           terraform plan \
+#             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_DEV }}" \
+#             -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID_DEV }}" \
+#             -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID_DEV }}" \
+#             -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID_DEV }}" \
+#             -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER_DEV }}" \
+#             -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD_DEV }}" \
+#             -var="vm_user=${{ secrets.TF_VAR_VM_USER_DEV }}" \
+#             -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD_PRD }}" \
+#             -var="metastore_id=${{ secrets.TF_VAR_METASTORE_ID }}"
 
-  terraform_plan_prd:
-    name: Terraform Plan para prd
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+#   terraform_plan_prd:
+#     name: Terraform Plan para prd
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
 
-      - name: Terraform Init
-        run: cd infra && terraform init
+#       - name: Terraform Init
+#         run: cd infra && terraform init
 
-      - name: Terraform Workspace New para prd
-        run: terraform workspace new prd
+#       - name: Terraform Workspace New para prd
+#         run: terraform workspace new prd
 
-      - name: Terraform Plan para prd
-        run: |
-          cd infra
-          terraform validate
-          terraform workspace select prd
-          terraform plan \
-            -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_PRD }}" \
-            -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID_PRD }}" \
-            -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID_PRD }}" \
-            -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID_PRD }}" \
-            -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER_PRD }}" \
-            -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD_PRD }}" \
-            -var="vm_user=${{ secrets.TF_VAR_VM_USER_PRD }}" \
-            -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD_PRD }}" \
-            -var="metastore_id=${{ secrets.TF_VAR_METASTORE_ID }}"
+#       - name: Terraform Plan para prd
+#         run: |
+#           cd infra
+#           terraform validate
+#           terraform workspace select prd
+#           terraform plan \
+#             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_PRD }}" \
+#             -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID_PRD }}" \
+#             -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID_PRD }}" \
+#             -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID_PRD }}" \
+#             -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER_PRD }}" \
+#             -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD_PRD }}" \
+#             -var="vm_user=${{ secrets.TF_VAR_VM_USER_PRD }}" \
+#             -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD_PRD }}" \
+#             -var="metastore_id=${{ secrets.TF_VAR_METASTORE_ID }}"

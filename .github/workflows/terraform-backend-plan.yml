@@ -1,25 +1,25 @@
-name: Terraform Backend Plan
-on: workflow_dispatch
-env:
-  ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
-  ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
-  ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
-  ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
+# name: Terraform Backend Plan
+# on: workflow_dispatch
+# env:
+#   ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
+#   ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
+#   ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
+#   ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
 
-jobs:
-  terraform_plan:
-    name: Terraform Plan
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+# jobs:
+#   terraform_plan:
+#     name: Terraform Plan
+#     runs-on: ubuntu-latest
+#     defaults:
+#       run:
+#         shell: bash
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
 
-      - name: Terraform Plan
-        run: |
-          cd backend
-          terraform init
-          terraform validate
-          terraform plan
+#       - name: Terraform Plan
+#         run: |
+#           cd backend
+#           terraform init
+#           terraform validate
+#           terraform plan
