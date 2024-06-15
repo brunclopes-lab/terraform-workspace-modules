@@ -15,7 +15,7 @@ env:
   sql_server_password: ${{secrets.TF_VAR_SQL_SERVER_PASSWORD}}
   vm_user: ${{secrets.TF_VAR_VM_USER}}
   vm_password: ${{secrets.TF_VAR_VM_PASSWORD}}
-
+  
 jobs:
   terraform_destroy:
     name: Terraform Destroy
