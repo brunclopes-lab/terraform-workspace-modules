@@ -33,7 +33,7 @@ jobs:
         run: |
           cd infra
           terraform validate
-          terraform workspace new dev
+          terraform workspace new dev || true
           terraform workspace select dev
           terraform plan \
             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_DEV }}" \
@@ -61,7 +61,7 @@ jobs:
         run: |
           cd infra
           terraform validate
-          terraform workspace new dev
+          terraform workspace new dev || true
           terraform workspace select dev
           terraform apply -auto-approve \
             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_DEV }}" \
@@ -88,7 +88,7 @@ jobs:
         run: |
           cd infra
           terraform validate
-          terraform workspace new prd
+          terraform workspace new prd || true
           terraform workspace select prd
           terraform plan \
             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_PRD }}" \
@@ -116,7 +116,7 @@ jobs:
         run: |
           cd infra
           terraform validate
-          terraform workspace new prd
+          terraform workspace new prd || true
           terraform workspace select prd
           terraform apply -auto-approve \
             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET_PRD }}" \
@@ -128,4 +128,3 @@ jobs:
             -var="vm_user=${{ secrets.TF_VAR_VM_USER_PRD }}" \
             -var="vm_password=${{ secrets.TF_VAR_VM_PASSWORD_PRD }}" \
             -var="metastore_id=${{ secrets.TF_VAR_METASTORE_ID }}"
-
