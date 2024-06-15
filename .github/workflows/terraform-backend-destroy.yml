@@ -1,0 +1,24 @@
+name: Terraform Backend Destroy
+on: workflow_dispatch
+env:
+  ARM_CLIENT_ID: ${{secrets.ARM_CLIENT_ID}}
+  ARM_TENANT_ID: ${{secrets.ARM_TENANT_ID}}
+  ARM_SUBSCRIPTION_ID: ${{secrets.ARM_SUBSCRIPTION_ID}}
+  ARM_CLIENT_SECRET: ${{secrets.ARM_CLIENT_SECRET}}
+
+jobs:
+  terraform_destroy:
+    name: Terraform Destroy
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Terraform Destroy
+      run: |
+        cd backend
+        terraform init
+        terraform destroy -auto-approve 
