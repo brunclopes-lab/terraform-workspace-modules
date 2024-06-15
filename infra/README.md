@@ -77,7 +77,7 @@ São criados recursos que definem roles para grupos e recursos.
 
 Já na parte do Metastore, são concedidos os grants abaixo do metastore para os grupos conforme imagem abaixo.
 
-![alt text](image.png)
+![alt text](./images/image.png)
 
 Após isso, é vinculado o metastore ao workspace existente. 
 
@@ -85,7 +85,7 @@ Após isso, é vinculado o metastore ao workspace existente.
 
 É criada uma storage credential e também concedidos grants para os grupos. 
 
-![alt text](image-1.png)
+![alt text](./images/image-1.png)
 
 ### External Location
 
@@ -95,13 +95,13 @@ Para o catálogo, é criada a external location no container metastore.
 
 Também são criadas as external locations para os schemas transient, bronze, silver e gold, além dos grants.
 
-![alt text](image-2.png)
+![alt text](./images/image-2.png)
 
 ### Catalog
 
 É criado o catálogo e também os grants para os grupos.
 
-![alt text](image-3.png)
+![alt text](./images/image-3.png)
 
 ### Schema
 
@@ -127,3 +127,5 @@ São criados os schemas transient, bronze, silver e gold, além dos grants para 
 | <a name="input_sql_server_user"></a> [sql\_server\_user](#input\_sql\_server\_user) | usuario do banco | `string` | n/a | yes |
 | <a name="input_vm_password"></a> [vm\_password](#input\_vm\_password) | senha da vm | `string` | n/a | yes |
 | <a name="input_vm_user"></a> [vm\_user](#input\_vm\_user) | usuario da vm | `string` | n/a | yes |
+
+[Veja mais detalhes sobre os recursos criados aqui](DOCS.md)
