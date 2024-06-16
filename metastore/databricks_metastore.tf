@@ -8,6 +8,8 @@ module "databricks_metastore" {
   metastore_name_interpolated = local.metastore_name_interpolated
   metastore_location          = var.metastore_location
   databricks_account_id       = var.databricks_account_id
-  databricks_user_id          = var.databricks_user_id
-  databricks_sp_terraform_id  = var.databricks_sp_terraform_id
+  # databricks_user_id          = var.databricks_user_id
+  # databricks_sp_terraform_id  = var.databricks_sp_terraform_id
+  databricks_sp_terraform_id = data.databricks_service_principal.sp_terraform.id
+  databricks_user_id         = data.databricks_user.principal_user.id
 }
