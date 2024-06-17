@@ -11,6 +11,7 @@ resource "databricks_external_location" "catalog" {
   comment         = "Managed by TF"
 
   depends_on = [
+    databricks_grants.metastore
   ]
 }
 
@@ -27,6 +28,7 @@ resource "databricks_external_location" "controller" {
   comment         = "Managed by TF"
 
   depends_on = [
+    databricks_grants.metastore
   ]
 }
 
@@ -43,6 +45,7 @@ resource "databricks_external_location" "transient" {
   comment         = "Managed by TF"
 
   depends_on = [
+    databricks_grants.metastore
   ]
 }
 
@@ -59,6 +62,7 @@ resource "databricks_external_location" "bronze" {
   comment         = "Managed by TF"
 
   depends_on = [
+    databricks_grants.metastore
   ]
 }
 
@@ -75,6 +79,7 @@ resource "databricks_external_location" "silver" {
   comment         = "Managed by TF"
 
   depends_on = [
+    databricks_grants.metastore
   ]
 }
 
@@ -91,6 +96,7 @@ resource "databricks_external_location" "gold" {
   comment         = "Managed by TF"
 
   depends_on = [
+    databricks_grants.metastore
   ]
 }
 
@@ -115,7 +121,7 @@ resource "databricks_grants" "external_location_catalog" {
 # PERMISSÃO A EXTERNAL LOCATION CONTROLLER
 resource "databricks_grants" "external_location_controller" {
   provider          = databricks.az-adb
-  external_location = databricks_external_location.transient.id
+  external_location = databricks_external_location.controller.id
   grant {
     principal  = data.databricks_group.group_metastore_owners.display_name
     privileges = ["ALL_PRIVILEGES"]

@@ -60,7 +60,31 @@ resource "databricks_schema" "gold" {
   ]
 }
 
+# CONCEDENDO PERMISSÕES AO SCHEMA CONTROLLER
+resource "databricks_grants" "grant_controller" {
+  provider = databricks.az-adb
+  schema   = databricks_schema.controller.id
+  grant {
+    principal  = data.databricks_group.group_metastore_owners.display_name
+    privileges = ["ALL_PRIVILEGES"]
+  }
+  grant {
+    principal  = data.databricks_group.group_data_engineers.display_name
+    privileges = ["ALL_PRIVILEGES"]
+  }
+  grant {
+    principal  = data.databricks_group.group_data_analysts.display_name
+    privileges = ["ALL_PRIVILEGES"]
+  }
+  grant {
+    principal  = data.databricks_group.group_data_governance.display_name
+    privileges = ["ALL_PRIVILEGES"]
+  }
 
+  depends_on = [
+    databricks_schema.controller
+  ]
+}
 
 # CONCEDENDO PERMISSÕES AO SCHEMA TRANSIENT
 resource "databricks_grants" "grant_transient" {

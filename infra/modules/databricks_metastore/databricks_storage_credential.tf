@@ -10,7 +10,8 @@ resource "databricks_storage_credential" "metastore" {
   comment = "Managed by TF"
 
   depends_on = [
-    databricks_metastore_assignment.metastore_workspace
+    databricks_metastore_assignment.metastore_workspace,
+    databricks_grants.metastore
   ]
 }
 
