@@ -59,13 +59,12 @@ variable "metastore_name" {
   default     = "uc-metastore"
 }
 
-variable "databricks_user_id" {
+variable "databricks_user_email" {
   type        = string
-  description = "ID do usuario principal no Databricks"
-  default     = "6625035817707273"
+  description = "Email do usuário principal no Databricks"
 }
 
-variable "databricks_sp_terraform_id" {
+variable "databricks_sp_terraform" {
   type        = string
   description = "ID do service principal terraform no Databricks"
 }

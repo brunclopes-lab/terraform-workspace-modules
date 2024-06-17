@@ -12,8 +12,8 @@ module "databricks_metastore" {
   databricks_workspace_url        = module.databricks.databricks_workspace.workspace_url
   azure_data_factory_principal_id = module.data_factory.data_factory.identity[0].principal_id
   databricks_account_id           = var.databricks_account_id
-  databricks_user_id              = var.databricks_user_id
-  databricks_sp_terraform_id      = var.databricks_sp_terraform_id
+  databricks_sp_terraform_id      = data.databricks_service_principal.sp_terraform.id
+  databricks_user_id              = data.databricks_user.principal_user.id
   access_connector_id             = module.access_connector.access_connector_id
   metastore_id                    = var.metastore_id
 }
