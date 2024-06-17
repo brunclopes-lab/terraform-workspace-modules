@@ -15,8 +15,8 @@ $env:AZDO_PERSONAL_ACCESS_TOKEN="" # Token do Azure DevOps
 $env:AZDO_ORG_SERVICE_URL="https://dev.azure.com/organization-example" # Link da organization do DevOps
 $env:azure_client_secret="" # Client Secret da App Registration para o Provider
 $env:databricks_account_id="" # Account ID do Databricks
-$env:databricks_sp_terraform_id="" # ID do Service Principal Criado (É possível obter pela API)
-$env:databricks_user_id="" # ID do usuário do Databricks (É possível obter pela API)
+$env:databricks_sp_terraform="" # ID do Service Principal Criado 
+$env:databricks_user_email="" # Email do usuário principal do Databricks
 $env:sql_server_user="" # Usuário do SQL Server a ser criado
 $env:sql_server_password="" # Senha do SQL Server a ser criado
 $env:vm_user="" # Usuário da VM
@@ -106,26 +106,5 @@ Também são criadas as external locations para os schemas transient, bronze, si
 ### Schema
 
 São criados os schemas transient, bronze, silver e gold, além dos grants para os grupos.
-
-### Variáveis Utilizadas
-
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_azure_client_secret"></a> [azure\_client\_secret](#input\_azure\_client\_secret) | Client Secret do Azure | `string` | n/a | yes |
-| <a name="input_databricks_account_id"></a> [databricks\_account\_id](#input\_databricks\_account\_id) | ID da conta do Databricks | `string` | n/a | yes |
-| <a name="input_databricks_sp_terraform_id"></a> [databricks\_sp\_terraform\_id](#input\_databricks\_sp\_terraform\_id) | ID do service principal terraform no Databricks | `string` | n/a | yes |
-| <a name="input_databricks_user_id"></a> [databricks\_user\_id](#input\_databricks\_user\_id) | ID do usuario principal no Databricks | `string` | `"6625035817707273"` | no |
-| <a name="input_location"></a> [location](#input\_location) | Localiza├º├úo do resource group | `string` | `"East US 2"` | no |
-| <a name="input_managed_by"></a> [managed\_by](#input\_managed\_by) | tag de quem est├í gerenciando os recursos (cria├º├úo e exclus├úo) | `string` | `"terraform"` | no |
-| <a name="input_metastore_id"></a> [metastore\_id](#input\_metastore\_id) | id do metastore | `string` | n/a | yes |
-| <a name="input_metastore_location"></a> [metastore\_location](#input\_metastore\_location) | Localiza├º├úo do metastore | `string` | `"eastus2"` | no |
-| <a name="input_metastore_name"></a> [metastore\_name](#input\_metastore\_name) | Nome do metastore | `string` | `"uc-metastore"` | no |
-| <a name="input_owner"></a> [owner](#input\_owner) | tag do owner | `string` | `"bruno"` | no |
-| <a name="input_prefix_name"></a> [prefix\_name](#input\_prefix\_name) | nome de prefixo do projeto | `string` | `"tfm-bl"` | no |
-| <a name="input_sa_containers_name"></a> [sa\_containers\_name](#input\_sa\_containers\_name) | containers a serem criados | `list(any)` | <pre>[<br>  "function-app",<br>  "transient",<br>  "bronze",<br>  "silver",<br>  "gold",<br>  "controller"<br>]</pre> | no |
-| <a name="input_sql_server_password"></a> [sql\_server\_password](#input\_sql\_server\_password) | senha do banco | `string` | n/a | yes |
-| <a name="input_sql_server_user"></a> [sql\_server\_user](#input\_sql\_server\_user) | usuario do banco | `string` | n/a | yes |
-| <a name="input_vm_password"></a> [vm\_password](#input\_vm\_password) | senha da vm | `string` | n/a | yes |
-| <a name="input_vm_user"></a> [vm\_user](#input\_vm\_user) | usuario da vm | `string` | n/a | yes |
 
 [Veja mais detalhes sobre os recursos criados aqui](DOCS.md)
