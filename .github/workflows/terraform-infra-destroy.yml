@@ -11,8 +11,8 @@ env:
   AZDO_PERSONAL_ACCESS_TOKEN: ${{secrets.AZDO_PERSONAL_ACCESS_TOKEN}}
   azure_client_secret: ${{secrets.TF_VAR_AZURE_CLIENT_SECRET}}
   databricks_account_id: ${{secrets.TF_VAR_DATABRICKS_ACCOUNT_ID}}
-  databricks_sp_terraform_id: ${{secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID}}
-  databricks_user_id: ${{secrets.TF_VAR_DATABRICKS_USER_ID}}
+  databricks_sp_terraform: ${{secrets.TF_VAR_DATABRICKS_SP_TERRAFORM}}
+  databricks_user_email: ${{secrets.TF_VAR_DATABRICKS_USER_EMAIL}}
   sql_server_user: ${{secrets.TF_VAR_SQL_SERVER_USER}}
   sql_server_password: ${{secrets.TF_VAR_SQL_SERVER_PASSWORD}}
   vm_user: ${{secrets.TF_VAR_VM_USER}}
@@ -39,8 +39,8 @@ jobs:
           terraform destroy -auto-approve \
             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET }}" \
             -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID }}" \
-            -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID }}" \
-            -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID }}" \
+            -var="databricks_sp_terraform=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM }}" \
+            -var="databricks_user_email=${{ secrets.TF_VAR_DATABRICKS_USER_EMAIL }}" \
             -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER }}" \
             -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD }}" \
             -var="vm_user=${{ secrets.TF_VAR_VM_USER }}" \
@@ -48,8 +48,8 @@ jobs:
             -var="prefix_name=${{secrets.TF_VAR_PREFIX_NAME}}" \
             -var="metastore_id=${{ secrets.TF_VAR_METASTORE_ID }}"
 
-  terraform_destroy_prod:
-    name: Terraform Destroy Prod
+  terraform_destroy_prd:
+    name: Terraform Destroy prd
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -58,17 +58,17 @@ jobs:
       - name: Terraform Init
         run: cd infra && terraform init
 
-      - name: Terraform Destroy Prod
+      - name: Terraform Destroy prd
         run: |
           cd infra
           terraform validate
-          terraform workspace new prod || true
-          terraform workspace select prod
+          terraform workspace new prd || true
+          terraform workspace select prd
           terraform destroy -auto-approve \
             -var="azure_client_secret=${{ secrets.TF_VAR_AZURE_CLIENT_SECRET }}" \
             -var="databricks_account_id=${{ secrets.TF_VAR_DATABRICKS_ACCOUNT_ID }}" \
-            -var="databricks_sp_terraform_id=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM_ID }}" \
-            -var="databricks_user_id=${{ secrets.TF_VAR_DATABRICKS_USER_ID }}" \
+            -var="databricks_sp_terraform=${{ secrets.TF_VAR_DATABRICKS_SP_TERRAFORM }}" \
+            -var="databricks_user_email=${{ secrets.TF_VAR_DATABRICKS_USER_EMAIL }}" \
             -var="sql_server_user=${{ secrets.TF_VAR_SQL_SERVER_USER }}" \
             -var="sql_server_password=${{ secrets.TF_VAR_SQL_SERVER_PASSWORD }}" \
             -var="vm_user=${{ secrets.TF_VAR_VM_USER }}" \
