@@ -1,10 +1,10 @@
 # CRIAÇÃO DOS GRUPOS DE RECURSOS 
-resource "azurerm_resource_group" "az_rg_prod" {
-  name     = "rg-${var.prefix_name}-prod"
+resource "azurerm_resource_group" "az_rg_prd" {
+  name     = "rg-${var.prefix_name}-prd"
   location = var.location
 
   tags = {
-    ambiente   = "prod"
+    ambiente   = "prd"
     managed_by = var.managed_by
     owner      = var.owner
   }
