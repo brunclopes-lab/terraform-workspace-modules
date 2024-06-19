@@ -107,4 +107,4 @@ Também são criadas as external locations para os schemas transient, bronze, si
 
 São criados os schemas transient, bronze, silver e gold, além dos grants para os grupos.
 
-[Veja mais detalhes sobre os recursos criados aqui](DOCS.md)
+[Veja mais detalhes sobre os recursos criados aqui.](DOCS.md)
